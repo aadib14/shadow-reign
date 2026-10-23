@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://crm8mptko5a3j"]
+
+[ext_resource type="Script" uid="uid://cn8rhnwccl6df" path="res://ShadowReign/scripts/arena_01.gd" id="1_m31rl"]
+[ext_resource type="Script" uid="uid://bsr3sw71sdqvj" path="res://ShadowReign/scenes/levels/ground.gd" id="2_trbgj"]
+[ext_resource type="PackedScene" uid="uid://b5m2k1qw3ggih" path="res://ShadowReign/scenes/player/playerv_2.tscn" id="3_jykkx"]
+[ext_resource type="PackedScene" uid="uid://c4pmu3hqmubrn" path="res://ShadowReign/scenes/enemies/enemy.tscn" id="4_a5r1y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp5od"]
+size = Vector2(640, 40)
+
+[sub_resource type="LabelSettings" id="LabelSettings_maajm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k56px"]
+size = Vector2(40, 500)
+
+[node name="Arena02" type="Node2D" unique_id=2053349249]
+script = ExtResource("1_m31rl")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1417458738]
+position = Vector2(320, 330)
+script = ExtResource("2_trbgj")
+ground_color = Color(0.46666667, 0.31764707, 0.6117647, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=758989279]
+shape = SubResource("RectangleShape2D_wp5od")
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground" unique_id=2038478409]
+color = Color(0.46666667, 0.31764707, 0.6117647, 1)
+
+[node name="Playerv2" parent="." unique_id=627938111 instance=ExtResource("3_jykkx")]
+position = Vector2(200, 200)
+
+[node name="Enemy" parent="." unique_id=1536785770 instance=ExtResource("4_a5r1y")]
+position = Vector2(450, 200)
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1825276302]
+visible = false
+
+[node name="DarkOverlay" type="ColorRect" parent="GameOverUI" unique_id=1242536127]
+z_index = -1
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="GameOverLabel" type="Label" parent="GameOverUI" unique_id=1712525764]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -30.0
+offset_right = 120.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9372549, 0.26666668, 0.26666668, 1)
+theme_override_font_sizes/font_size = 32
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_maajm")
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOverUI" unique_id=286369641]
+visible = false
+offset_left = 260.0
+offset_top = 215.0
+offset_right = 380.0
+offset_bottom = 251.0
+text = "RETRY"
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=386287476]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=2001439728]
+position = Vector2(-18, 101)
+shape = SubResource("RectangleShape2D_k56px")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1976208211]
+position = Vector2(679, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=714785169]
+position = Vector2(-14, 101)
+shape = SubResource("RectangleShape2D_k56px")
+
+[node name="VictoryUI" type="CanvasLayer" parent="." unique_id=1764311359]
+visible = false
+
+[node name="VictoryOverlay" type="ColorRect" parent="VictoryUI" unique_id=39812840]
+z_index = -1
+offset_right = 649.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="VictoryLabel" type="Label" parent="VictoryUI" unique_id=180321889]
+self_modulate = Color(0.98039216, 0.8, 0.08235294, 1)
+offset_left = 204.0
+offset_top = 154.0
+offset_right = 444.0
+offset_bottom = 214.0
+theme_override_font_sizes/font_size = 32
+text = "VICTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stage2Background" type="Polygon2D" parent="." unique_id=778732806]
+z_index = -10
+position = Vector2(341, -83)
+color = Color(0.12941177, 0.09019608, 0.18039216, 1)
+polygon = PackedVector2Array(-408.5564, -81.06323, 373.72876, -81.06323, 368.10095, 446.5283, -405.56287, 455.94165)
+uv = PackedVector2Array(-328.4996, -58.999695, 62.500397, -56.999695, 65.50238, 54.9693, -333.79764, 50.569305)
+
+[connection signal="pressed" from="GameOverUI/RetryButton" to="." method="_on_retry_button_pressed"]

@@ -24,6 +24,7 @@ script = ExtResource("1_5o6dd")
 shape = SubResource("RectangleShape2D_wp5od")
 
 [node name="Polygon2D" type="Polygon2D" parent="Ground" unique_id=2038478409]
+color = Color(0.33333334, 0.31764707, 0.37254903, 1)
 
 [node name="Playerv2" parent="." unique_id=627938111 instance=ExtResource("2_76hxj")]
 position = Vector2(200, 200)
