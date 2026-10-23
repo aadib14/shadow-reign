@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bwg2s43h5sr1j"]
+
+[ext_resource type="Script" uid="uid://bsr3sw71sdqvj" path="res://ShadowReign/scenes/levels/ground.gd" id="1_5o6dd"]
+[ext_resource type="Script" uid="uid://cn8rhnwccl6df" path="res://ShadowReign/scripts/arena_01.gd" id="1_nis83"]
+[ext_resource type="PackedScene" uid="uid://b5m2k1qw3ggih" path="res://ShadowReign/scenes/player/playerv_2.tscn" id="2_76hxj"]
+[ext_resource type="PackedScene" uid="uid://c4pmu3hqmubrn" path="res://ShadowReign/scenes/enemies/enemy.tscn" id="3_maajm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp5od"]
+size = Vector2(640, 40)
+
+[sub_resource type="LabelSettings" id="LabelSettings_maajm"]
+
+[node name="Arena01" type="Node2D" unique_id=2053349249]
+script = ExtResource("1_nis83")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1417458738]
+position = Vector2(320, 330)
+script = ExtResource("1_5o6dd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=758989279]
+shape = SubResource("RectangleShape2D_wp5od")
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground" unique_id=2038478409]
+
+[node name="Playerv2" parent="." unique_id=627938111 instance=ExtResource("2_76hxj")]
+position = Vector2(200, 200)
+
+[node name="Enemy" parent="." unique_id=1536785770 instance=ExtResource("3_maajm")]
+position = Vector2(450, 200)
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1825276302]
+
+[node name="GameOverLabel" type="Label" parent="GameOverUI" unique_id=1712525764]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -30.0
+offset_right = 120.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9372549, 0.26666668, 0.26666668, 1)
+theme_override_font_sizes/font_size = 32
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_maajm")
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOverUI" unique_id=286369641]
+visible = false
+offset_left = 260.0
+offset_top = 215.0
+offset_right = 380.0
+offset_bottom = 251.0
+text = "RETRY"
+
+[connection signal="pressed" from="GameOverUI/RetryButton" to="." method="_on_retry_button_pressed"]

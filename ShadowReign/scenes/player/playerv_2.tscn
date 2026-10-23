@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b5m2k1qw3ggih"]
+
+[ext_resource type="Script" uid="uid://f67prhlmlch8" path="res://ShadowReign/scenes/player/playerv_2.gd" id="1_0yqkt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp5od"]
+size = Vector2(24, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k56px"]
+size = Vector2(40, 30)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oum0j"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.08627451, 0.08235294, 0.10980392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yqkt"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.2627451, 0.627451, 0.2784314, 1)
+
+[node name="Playerv2" type="CharacterBody2D" unique_id=627938111]
+script = ExtResource("1_0yqkt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1308519117]
+shape = SubResource("RectangleShape2D_wp5od")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1271700140]
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1875180282]
+position = Vector2(32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1263166272]
+shape = SubResource("RectangleShape2D_k56px")
+disabled = true
+
+[node name="SlashVisual" type="Polygon2D" parent="AttackHitbox" unique_id=1764834164]
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=80936162]
+offset_left = -18.0
+offset_top = -32.0
+offset_right = 18.0
+offset_bottom = -26.0
+theme_override_styles/background = SubResource("StyleBoxFlat_oum0j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0yqkt")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

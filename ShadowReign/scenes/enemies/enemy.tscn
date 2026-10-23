@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://c4pmu3hqmubrn"]
+
+[ext_resource type="Script" uid="uid://c4uh7fxv022y3" path="res://ShadowReign/scenes/enemies/enemy.gd" id="1_q2e1r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vatf8"]
+size = Vector2(24, 48)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2e1r"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.08627451, 0.08235294, 0.10980392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5411765, 0.5411765, 0.5411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wutp0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.7764706, 0.15686275, 0.15686275, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wp5od"]
+radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp5od"]
+size = Vector2(44, 30)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1536785770]
+script = ExtResource("1_q2e1r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=569538622]
+shape = SubResource("RectangleShape2D_vatf8")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=196253861]
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=194157773]
+offset_left = -18.0
+offset_top = -32.0
+offset_right = 18.0
+offset_bottom = -26.0
+theme_override_styles/background = SubResource("StyleBoxFlat_q2e1r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wutp0")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1120215866]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1554736784]
+shape = SubResource("CircleShape2D_wp5od")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=274624578]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1320076557]
+shape = SubResource("RectangleShape2D_wp5od")
+disabled = true
+
+[node name="SlashVisual" type="Polygon2D" parent="AttackArea" unique_id=1821029981]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
