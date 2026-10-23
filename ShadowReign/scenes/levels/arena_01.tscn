@@ -10,6 +10,9 @@ size = Vector2(640, 40)
 
 [sub_resource type="LabelSettings" id="LabelSettings_maajm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k56px"]
+size = Vector2(40, 500)
+
 [node name="Arena01" type="Node2D" unique_id=2053349249]
 script = ExtResource("1_nis83")
 
@@ -29,6 +32,14 @@ position = Vector2(200, 200)
 position = Vector2(450, 200)
 
 [node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1825276302]
+visible = false
+
+[node name="DarkOverlay" type="ColorRect" parent="GameOverUI" unique_id=1242536127]
+z_index = -1
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
 
 [node name="GameOverLabel" type="Label" parent="GameOverUI" unique_id=1712525764]
 visible = false
@@ -56,5 +67,18 @@ offset_top = 215.0
 offset_right = 380.0
 offset_bottom = 251.0
 text = "RETRY"
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=386287476]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=2001439728]
+position = Vector2(-18, 101)
+shape = SubResource("RectangleShape2D_k56px")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1976208211]
+position = Vector2(679, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=714785169]
+position = Vector2(-18, 101)
+shape = SubResource("RectangleShape2D_k56px")
 
 [connection signal="pressed" from="GameOverUI/RetryButton" to="." method="_on_retry_button_pressed"]

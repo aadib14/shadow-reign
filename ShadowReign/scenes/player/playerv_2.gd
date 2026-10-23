@@ -1,5 +1,8 @@
 
 extends CharacterBody2D
+
+@export var arena_left: float = 20.0
+@export var arena_right: float = 620.0
 @export var max_health: int = 100
 
 var health: int = 100
@@ -62,7 +65,14 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		velocity.x = 0.0
 		velocity.y += GRAVITY * delta
+		
 		move_and_slide()
+		global_position.x = clampf(
+		global_position.x,
+		arena_left,
+		arena_right
+	)
+	
 		return
 
 
