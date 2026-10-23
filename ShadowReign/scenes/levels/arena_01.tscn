@@ -81,4 +81,25 @@ position = Vector2(679, -1)
 position = Vector2(-18, 101)
 shape = SubResource("RectangleShape2D_k56px")
 
+[node name="VictoryUI" type="CanvasLayer" parent="." unique_id=1764311359]
+visible = false
+
+[node name="VictoryOverlay" type="ColorRect" parent="VictoryUI" unique_id=39812840]
+z_index = -1
+offset_right = 649.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="VictoryLabel" type="Label" parent="VictoryUI" unique_id=180321889]
+self_modulate = Color(0.98039216, 0.8, 0.08235294, 1)
+offset_left = 204.0
+offset_top = 154.0
+offset_right = 444.0
+offset_bottom = 214.0
+theme_override_font_sizes/font_size = 32
+text = "VICTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="GameOverUI/RetryButton" to="." method="_on_retry_button_pressed"]

@@ -128,8 +128,14 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 
 	print("ABYSS SOLDIER DEFEATED!")
+	
+	
+	var arena = get_parent()
 
-	# Menghapus musuh dari arena
+	if arena.has_method("show_victory"):
+		arena.show_victory()
+	else:
+		print("ERROR: Arena tidak memiliki fungsi show_victory!")
 	queue_free()
 	
 
@@ -211,9 +217,6 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body == target:
 		target = null
 		print("ABYSS SOLDIER: KAEL KELUAR DARI JANGKAUAN!")
-
-
-
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if not is_attacking:
